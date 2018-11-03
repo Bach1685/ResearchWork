@@ -1,0 +1,7 @@
+D:\Магистратура\RW\ResearchWork\Test\bin\Debug\Test.exe.config
+D:\Магистратура\RW\ResearchWork\Test\bin\Debug\Test.exe
+D:\Магистратура\RW\ResearchWork\Test\bin\Debug\Test.pdb
+D:\Магистратура\RW\ResearchWork\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\Магистратура\RW\ResearchWork\Test\obj\Debug\Test.exe
+D:\Магистратура\RW\ResearchWork\Test\obj\Debug\Test.pdb
+D:\Магистратура\RW\ResearchWork\Test\obj\Debug\Test.csprojAssemblyReference.cache

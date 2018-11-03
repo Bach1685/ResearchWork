@@ -1,0 +1,10 @@
+D:\Магистратура\RW\ResearchWork\ResearchWork\bin\Debug\ResearchWork.exe.config
+D:\Магистратура\RW\ResearchWork\ResearchWork\bin\Debug\ResearchWork.exe
+D:\Магистратура\RW\ResearchWork\ResearchWork\bin\Debug\ResearchWork.pdb
+D:\Магистратура\RW\ResearchWork\ResearchWork\obj\Debug\ResearchWork.csprojAssemblyReference.cache
+D:\Магистратура\RW\ResearchWork\ResearchWork\obj\Debug\ResearchWork.Form1.resources
+D:\Магистратура\RW\ResearchWork\ResearchWork\obj\Debug\ResearchWork.Properties.Resources.resources
+D:\Магистратура\RW\ResearchWork\ResearchWork\obj\Debug\ResearchWork.csproj.GenerateResource.cache
+D:\Магистратура\RW\ResearchWork\ResearchWork\obj\Debug\ResearchWork.csproj.CoreCompileInputs.cache
+D:\Магистратура\RW\ResearchWork\ResearchWork\obj\Debug\ResearchWork.exe
+D:\Магистратура\RW\ResearchWork\ResearchWork\obj\Debug\ResearchWork.pdb

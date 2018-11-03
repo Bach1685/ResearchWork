@@ -17,7 +17,7 @@ namespace ResearchWork
         {
             InitializeComponent();
            // button1.Click += button1_Click;
-            openFileDialog1.Filter = "Text files(*.xls)|*.xls|All files(*.*)|*.*";
+            openFileDialog1.Filter = "Text files(*.xlsx)|*.xlsx|All files(*.*)|*.*";
           //  saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
         }
 
@@ -33,14 +33,20 @@ namespace ResearchWork
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку
 
             int iLastRow = ObjWorkSheet.Cells[ObjWorkSheet.Rows.Count, "A"].End[Excel.XlDirection.xlUp].Row;  //последняя заполненная строка в столбце А
-           // var arrData = (object[,])ObjWorkSheet.Range["A1:O" + iLastRow].Value;
-            var arrData = (double[,])ObjWorkSheet.Range["A1:O" + iLastRow].Value;
-
-
+            var arrData = (object[,])ObjWorkSheet.Range["A1:O" + iLastRow].Value;
 
 
 
             List<Area> area = new List<Area>();
+
+            Methods.Systematizing(area, arrData, iLastRow);
+
+
+
+
+
+
+           
 
 
             //for (int i = 0; i < 5703; i++)
@@ -51,12 +57,12 @@ namespace ResearchWork
             //}
             // создать объект польз. типа и добавляем его потом в цикле в список 
 
-            for (int i = 0; i < iLastRow; i++) //по всем колонкам
-            {
-                Area newArea = new Area();
-                newArea.RadialStress = arrData[i+1,1];
-                area.Add(newArea);
-            }
+            //for (int i = 0; i < iLastRow; i++) //по всем колонкам
+            //{
+            //    Area newArea = new Area();
+            //    newArea.RadialStress = arrData[i+1,1];
+            //    area.Add(newArea);
+            //}
 
 
             //for (int i = 0; i < 5703; i++)

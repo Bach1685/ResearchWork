@@ -24,6 +24,7 @@ namespace ResearchWork
         public Area()
         {
             ShortCracks = new List<ShortCrack>();
+            Stress = new Stresses();
         }
         
     }

@@ -8,7 +8,7 @@ namespace ResearchWork
 {
     class Methods
     {
-        public static void Systematizing (List<Area> Area, object[,] arrData, int iLastRow)
+        public static void Systematizing (List<Area> area, object[,] arrData, int iLastRow)
         {
             double[] recordMaxPrincipal = new double[20];
             double[] recordRadial = new double[20];
@@ -17,73 +17,138 @@ namespace ResearchWork
           //  double r;
             int z = 0, alpha = 0, r = 0;
             int a = 0;
+            int row = 0, column = 0;
             bool isThreeNodes = true;
+            bool isThreeRow = true;
             double countRow = 0, countDeep = 1;
 
             for (int i = 0; i < iLastRow; i++)
             {
-                if (i == 40000)
-                {
+                double w = (double)arrData[i + 1, 4];
+                double ww = (double)arrData[i + 1, 6];
+                double www = Math.Round((double)arrData[i + 1, 5],2);
 
-                }
-                if ((double)arrData[i + 1, 4] > ((-12.5 + 0.42 * z) - 0.3) && (double)arrData[i + 1, 4] < ((-12.5 + 0.42 * z) + 0.3)
-                    && ((double)arrData[i + 1, 6] > (90 - (0.5 * alpha)) && (double)arrData[i + 1, 6] < (90 + (0.5 * alpha)))
-                    && ((double)arrData[i + 1, 5] > (25 - (0.4 * r)) && (double)arrData[i + 1, 5] < (25 + (0.4 * r))))
+                if (Math.Round((double)arrData[i + 1, 4],2) >= ((-12.5 + 0.42 * z) - 0.3) && Math.Round((double)arrData[i + 1, 4],2) <= ((-12.5 + 0.42 * z) + 0.3)
+                   && (Math.Round((double)arrData[i + 1, 6],2) >= ((90 - (0.75 * alpha)) - 0.5) && (Math.Round((double)arrData[i + 1, 6],2) <= ((90 - (0.75 * alpha)) + 0.5)))
+                   && (Math.Round((double)arrData[i + 1, 5],2) >= ((25 + (0.08 * r)) - 0.04) && Math.Round((double)arrData[i + 1, 5],2) <= ((25 + (0.08 * r)) + 0.04)))
                 {
+                    double Z = (double)arrData[i + 1, 4];
+                    double ALPHA = (double)arrData[i + 1, 6];
+                    double R = (double)arrData[i + 1, 5];
+
                     recordMaxPrincipal[a] = (double)arrData[i + 1, 11];
                     recordRadial[a] = (double)arrData[i + 1, 13];
+
                     a++;
 
-                    i = 0;
-
-                    if (i == 40000)
+                    if (a == 20)
                     {
+                        Area ar = new Area();
+                        ar.Stress.Radial = recordRadial.Sum() / recordRadial.Length;
+                        ar.Stress.MaxPrincipal = recordMaxPrincipal.Sum() / recordMaxPrincipal.Length;
+                        area.Add(ar);
 
-                    }
-
-                    if (isThreeNodes)
-                    {
-                        z++;
-                        //if (z == 2)
-                        //{
+                        a = 0;
+                        r -= 2;
+                        alpha -= 2;
                         //    z -= 2;
-                        //    alpha++;
-                        //    isThreeNodes = !isThreeNodes;
-                        //    countRow++;
-                        //}
+                        column += 2;
+                        countRow = 0;
+                        continue;
                     }
-                    else
+
+                    i = 0; // для поиска заново
+                    z++;
+
+                    if (isThreeRow)
                     {
-                        z += 2;
-                        //if (z == 2)
-                        //{
-                        //    z -= 2;
-                        //    alpha++;
-                        //    if (countDeep % 2 != 0)
-                        //        isThreeNodes = !isThreeNodes;
-                        //    countRow++;
-                        //}
-                    }
-                    if (z == 2)
-                    {
-                        z -= 2;
-                        alpha++;
-                        if (countDeep % 2 != 0)
+                        if (z == 3 + column) 
                         {
+                            z -= 3;
+                            alpha++;
                             isThreeNodes = !isThreeNodes;
                             countRow++;
                         }
-                        else
-                            countRow += 2;
+
+                        if (countRow == 3)
+                        {
+                            countRow = 0;
+                            isThreeRow = !isThreeRow;
+                            alpha -= 3;
+                            r++;
+                        }
+                    }
+                    else
+                    {
+                        if (z == 3 + column)
+                        {
+                            z -= 3;
+                            alpha += 2;
+                            countRow++;
+                        }
+
+                        if (countRow == 2)
+                        {
+                            countRow = 0;
+                            isThreeRow = !isThreeRow;
+                            isThreeNodes = !isThreeNodes;
+                            alpha -= 4;
+                            r++;
+                        }
                     }
 
-                    if (countRow == 2)
-                    {
-                        r++;
-                        alpha -= 3;
-                        isThreeNodes = !isThreeNodes;
-                        countDeep++;
-                    }
+                    if ((z == 1 + column) && !isThreeNodes)
+                        z++;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    //  a++;
+                    //  i = 0; // для поиска заново
+                    // // if (isThreeNodes)
+                    //      z++;
+                    ////  else
+                    ////      z += 3;
+
+                    //  if(z==2 && !isThreeNodes)
+                    //  {
+                    //      z -= 2;
+                    //      countRow++;
+                    //      alpha+=2;
+                    //      isThreeNodes = !isThreeNodes;
+                    //  }
+
+                    //  if (z == 3)
+                    //  {
+                    //      z -= 3;
+                    //      alpha++;
+                    //      if (countDeep % 2 != 0)
+                    //      {
+                    //          isThreeNodes = !isThreeNodes;
+                    //          countRow++;
+                    //      }
+                    //      else
+                    //          countRow += 2;
+                    //  }
+
+                    //  if (countRow == 2)
+                    //  {
+                    //      r++;
+                    //      alpha -= 3;
+                    //      isThreeNodes = !isThreeNodes;
+                    //      countDeep++;
+                    //  }
 
 
 

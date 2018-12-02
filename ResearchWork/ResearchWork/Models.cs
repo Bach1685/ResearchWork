@@ -16,7 +16,12 @@ namespace ResearchWork
         public double Damage { get; set; }
         public double M_destructed { get; set; }
         public double Damage0 { get; set; }
-        public double M_destructed0 { get; set; }
+
+        /// <summary>
+        /// Начальное количество разрушенных СЭ
+        /// </summary>
+        public double Mdestr0 { get; set; }
+
         public Stresses Stress { get; set; }
         public Coordinates Coordinate { get; set; }
 

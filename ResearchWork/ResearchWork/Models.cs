@@ -9,12 +9,43 @@ namespace ResearchWork
     class Models
     {
         public List<Area> Areas = new List<Area>();
+
+        /// <summary>
+        /// Вероятность возникновения КТ во всем объеме
+        /// </summary>
+        public double ShortCrackTotalProbability { get; set; }
     }
 
     class Area
     {
+        /// <summary>
+        /// Объем участка
+        /// </summary>
+        public double Value { get; set; }
+        
+        /// <summary>
+        /// Поврежденность участка
+        /// </summary>
         public double Damage { get; set; }
-        public double M_destructed { get; set; }
+
+        /// <summary>
+        /// Вероятность возникновения КТ на участке
+        /// </summary>
+        public double ShortCrackProbability  { get; set; }
+
+        /// <summary>
+        ///  Количество структурных элементов на участке
+        /// </summary>
+        public double StructuralElementsNumber  { get; set; }
+
+        /// <summary>
+        ///  Количество разрушенных структурных элементов на участке
+        /// </summary>
+        public double DestroyedStructuralElementsNumber  { get; set; }
+
+        /// <summary>
+        /// Начальная поврежденность участка
+        /// </summary>
         public double Damage0 { get; set; }
 
         /// <summary>
@@ -22,10 +53,14 @@ namespace ResearchWork
         /// </summary>
         public double Mdestr0 { get; set; }
 
-        public Stresses Stress { get; set; }
+        public Stress Stress { get; set; }
+
         public Coordinates Coordinate { get; set; }
 
         public List<ShortCrack> ShortCracks { get; set; }
+
+        public double DamageAccumulationRate { get; set; }
+
         public Area()
         {
             ShortCracks = new List<ShortCrack>();
@@ -41,9 +76,9 @@ namespace ResearchWork
         public double Alpha { get; set; }
     }
 
-     class Stresses
+     class Stress
     {
-        public object Radial { get; set; }
+        public double Radial { get; set; }
         public double MaxPrincipal { get; set; }
     }
 
@@ -52,11 +87,13 @@ namespace ResearchWork
     {
         public double Length { get; set; }
         public double SIF { get; set; }
+        public double DevelopmentRate { get; set; }
     }
     class MackroCrack
     {
         public double length { get; set; }
         public double SIF { get; set; }
+        public double DevelopmentRate { get; set; }
     }
 
     //class Stress

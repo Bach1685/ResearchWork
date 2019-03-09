@@ -28,28 +28,16 @@ namespace ResearchWork
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
-            //    return;
-
-            //Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
-            //Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(openFileDialog1.FileName); //открыть файл
-            //Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
-
-            //var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку
-
-            //int iLastRow = ObjWorkSheet.Cells[ObjWorkSheet.Rows.Count, "A"].End[Excel.XlDirection.xlUp].Row;  //последняя заполненная строка в столбце А
-            //var arrData = (object[,])ObjWorkSheet.Range["A1:O" + iLastRow].Value;
-
-           
-            //textBox2.Text = openFileDialog1.FileName;
-
-            List<Area> area = new List<Area>();
-
-            double Mdestr0 = 0;
+            List<Area> areas = new List<Area>();
+            double initialDamage = 0;
+            int stepsNumber = 0;
+            int cyclesPerStepNumber = 0;
 
             try
             {
-                Mdestr0 = Convert.ToDouble(textBox1.Text);
+                initialDamage = Convert.ToDouble(textBox1.Text);
+                cyclesPerStepNumber = Convert.ToInt32(textBox2.Text);
+                stepsNumber = Convert.ToInt32(textBox3.Text);
             }
             catch(Exception)
             {
@@ -57,34 +45,19 @@ namespace ResearchWork
                 return;
             }
 
-            foreach (Area elem in area)
-                elem.Mdestr0 = Convert.ToDouble(Mdestr0);
+            foreach (Area area in areas)
+                area.Mdestr0 = Convert.ToDouble(initialDamage);
 
             // Task task = Task.Run(() => Methods.Systematizing(area, arrData, iLastRow));
 
-            Methods.Systematizing(area, arrData, iLastRow);
-            for (int i = 0; i < 100; i++)
-            {
-                richTextBox1.Text += Math.Round((double)area[i].Stress.Radial, 3) + " ";
-                if ((i + 1) % 15 == 0)
-                    richTextBox1.Text += "\n";
-            }
+            Methods.Systematizing(areas, arrData, iLastRow);
 
+            Models md = new Models();
 
-
-            //ObjWorkBook.Close(false, Type.Missing, Type.Missing); //закрыть не сохраняя
-
-
-
-            //ObjWorkExcel.Quit(); // выйти из экселя
+            Methods.TimeСycle(areas, stepsNumber, cyclesPerStepNumber); // надо проверить, как передается ShortCrackTotalProbability
 
 
             //Mdestructed0 = Math.Round((numberStructuralElements * damage0),0); //Зная поврежденность и общее количество СЭ, можно узнать количество разрушенных СЭ;
-
-
-
-
-
         }
 
         private void label1_Click(object sender, EventArgs e)

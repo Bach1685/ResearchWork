@@ -29,15 +29,15 @@ namespace ResearchWork
         private void button1_Click(object sender, EventArgs e)
         {
             List<Area> areas = new List<Area>();
-            double initialDamage = 0;
+            double InitialDestroyedStructuralElementsNumber = 0;
             int stepsNumber = 0;
             int cyclesPerStepNumber = 0;
 
             try
             {
-                initialDamage = Convert.ToDouble(textBox1.Text);
-                cyclesPerStepNumber = Convert.ToInt32(textBox2.Text);
-                stepsNumber = Convert.ToInt32(textBox3.Text);
+                InitialDestroyedStructuralElementsNumber = Convert.ToDouble(textBox1.Text);
+                cyclesPerStepNumber = Convert.ToInt32(textBox3.Text);
+                stepsNumber = Convert.ToInt32(textBox4.Text);
             }
             catch(Exception)
             {
@@ -45,13 +45,17 @@ namespace ResearchWork
                 return;
             }
 
-            foreach (Area area in areas)
-                area.Mdestr0 = Convert.ToDouble(initialDamage);
+            
 
             // Task task = Task.Run(() => Methods.Systematizing(area, arrData, iLastRow));
 
             Methods.Systematizing(areas, arrData, iLastRow);
 
+            foreach (Area area in areas)
+            {
+                area.InitialDestroyedStructuralElementsNumber = Convert.ToDouble(InitialDestroyedStructuralElementsNumber);
+                area.StructuralElementsNumber = 4000; // перенести
+            }
             Models md = new Models();
 
             Methods.TimeСycle(areas, stepsNumber, cyclesPerStepNumber); // надо проверить, как передается ShortCrackTotalProbability

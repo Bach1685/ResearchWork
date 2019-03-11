@@ -39,19 +39,19 @@ namespace ResearchWork
         public double StructuralElementsNumber  { get; set; }
 
         /// <summary>
-        ///  Количество разрушенных структурных элементов на участке
+        ///  Количество разрушенных СЭ на участке
         /// </summary>
         public double DestroyedStructuralElementsNumber  { get; set; }
 
         /// <summary>
         /// Начальная поврежденность участка
         /// </summary>
-        public double Damage0 { get; set; }
+        public double InitialDamage { get; set; }
 
         /// <summary>
         /// Начальное количество разрушенных СЭ
         /// </summary>
-        public double Mdestr0 { get; set; }
+        public double InitialDestroyedStructuralElementsNumber { get; set; }
 
         public Stress Stress { get; set; }
 
@@ -64,7 +64,7 @@ namespace ResearchWork
         public Area()
         {
             ShortCracks = new List<ShortCrack>();
-            Stress = new Stresses();
+            Stress = new Stress();
         }
         
     }
@@ -104,7 +104,7 @@ namespace ResearchWork
 
     class Record
     {
-        public Stresses Stress { get; set; }
+        public Stress Stress { get; set; }
     }
 
 

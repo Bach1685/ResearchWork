@@ -39,7 +39,7 @@ namespace ResearchWork
                     if (a == 20)
                     {
                         Area ar = new Area();
-                        ar.Stress.Radial = recordRadial.Sum() / recordRadial.Length;
+                        ar.Stress.Radial = recordRadial.Sum() / recordRadial.Length; // суммируются не модульные выражения
                         ar.Stress.MaxPrincipal = recordMaxPrincipal.Sum() / recordMaxPrincipal.Length;
                         area.Add(ar);
 
@@ -156,7 +156,8 @@ namespace ResearchWork
                     ShortCrack shortCrack = new ShortCrack();
                     shortCrack.Length = 0.0002;
 
-                    double B_tr = 0.006, h_rt = 0.002, f_g = 1.0;
+                    double B_tr = 0.006, h_rt = 0.002, f_g = 1.0; // B_tr должно быть равно 12.5 мм, а не 6 мм
+                    //h_rt должно варьироваться, это ж толщина слоя 
 
                     double f_B = Math.Sqrt(1 / (Math.Cos((3.14 * (shortCrack.Length / 2) / B_tr) * Math.Sqrt(shortCrack.Length / (2 * h_rt)))));
                     double F_function = (1.04 + (0.202 * Math.Pow((shortCrack.Length / 2) / 0.002, 2)) + ((-1.06) * Math.Pow(((shortCrack.Length / 2) / 0.002), 4))) * 1.0 * f_g * f_B;
@@ -248,7 +249,7 @@ namespace ResearchWork
         //public static void ShortCracksCycle(List<Area> areas/*, int cycleCounter*/, int areasCounter, int numberCyclesPerStep, ref double V_sum)
         public static void ShortCracksCycle(Area area, int areasCount, int numberCyclesPerStep, ref double V_sum)
         {
-            area.Value = ((4.9052 * Math.Pow(10.0, -4.0)) / areasCount) * 0.002;
+            area.Value = ((4.9052 * Math.Pow(10.0, -4.0)) / areasCount) * 0.002; //ОБЪЕМ ДРУГОЙ! пОТОМУ ЧТО УЧАСТКОВ СТАЛО БОЛЬШЕ, А ТОЛЩИНА НЕ ИЗМЕНИЛАСЬ
 
             foreach (var shortCrack in area.ShortCracks)
             {
@@ -256,14 +257,15 @@ namespace ResearchWork
 
                 shortCrack.Length += shortCrack.DevelopmentRate * numberCyclesPerStep;
 
-                if (shortCrack.Length > 0.005) //насколько это корректно
+                if (shortCrack.Length > 0.005) //насколько это корректно (типа выставлять костыльно КИН и длину)
                 {
                     shortCrack.SIF = 3;
                     shortCrack.Length = 0.005;
                 }
                 else
                 {
-                    double B_tr = 0.006, h_rt = 0.002, f_g = 1.0;
+                    double B_tr = 0.006, h_rt = 0.002, f_g = 1.0; // B_tr должно быть равно 12.5 мм, а не 6 мм
+                    //h_rt должно варьироваться, это ж толщина слоя 
 
                     double f_B = Math.Sqrt(1 / (Math.Cos((3.14 * (shortCrack.Length / 2) / B_tr) * Math.Sqrt(shortCrack.Length / (2 * h_rt)))));
                     double F_function = (1.04 + (0.202 * Math.Pow((shortCrack.Length / 2) / 0.002, 2)) + ((-1.06) * Math.Pow(((shortCrack.Length / 2) / 0.002), 4))) * 1.0 * f_g * f_B;

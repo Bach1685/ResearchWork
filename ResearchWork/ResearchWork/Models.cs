@@ -36,12 +36,12 @@ namespace ResearchWork
         /// <summary>
         ///  Количество структурных элементов на участке
         /// </summary>
-        public double StructuralElementsNumber  { get; set; }
+        public double StructuralElementsCount { get; set; }
 
         /// <summary>
         ///  Количество разрушенных СЭ на участке
         /// </summary>
-        public double DestroyedStructuralElementsNumber  { get; set; }
+        public double DestroyedStructuralElementsCount  { get; set; }
 
         /// <summary>
         /// Начальная поврежденность участка
@@ -51,14 +51,21 @@ namespace ResearchWork
         /// <summary>
         /// Начальное количество разрушенных СЭ
         /// </summary>
-        public double InitialDestroyedStructuralElementsNumber { get; set; }
+        public double InitialDestroyedStructuralElementsCount { get; set; }
 
+        /// <summary>
+        /// Напряжения
+        /// </summary>
         public Stress Stress { get; set; }
 
-        public Coordinates Coordinate { get; set; }
-
+        /// <summary>
+        /// Короткие напряжения
+        /// </summary>
         public List<ShortCrack> ShortCracks { get; set; }
 
+        /// <summary>
+        /// Скорость накопления напряжений
+        /// </summary>
         public double DamageAccumulationRate { get; set; }
 
         public Area()
@@ -66,48 +73,43 @@ namespace ResearchWork
             ShortCracks = new List<ShortCrack>();
             Stress = new Stress();
         }
-        
-    }
-    class Coordinates
-    {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Z { get; set; }
-        public double Alpha { get; set; }
     }
 
-     class Stress
+    class Stress
     {
+        /// <summary>
+        /// Радиальное напряжение
+        /// </summary>
         public double Radial { get; set; }
+
+        /// <summary>
+        /// Первое главное напряжение
+        /// </summary>
         public double MaxPrincipal { get; set; }
     }
 
-
     class ShortCrack
+    {
+        /// <summary>
+        /// Длина
+        /// </summary>
+        public double Length { get; set; }
+
+        /// <summary>
+        /// КИН
+        /// </summary>
+        public double SIF { get; set; }
+
+        /// <summary>
+        /// Скорость развития
+        /// </summary>
+        public double DevelopmentRate { get; set; }
+    }
+
+    class MackroCrack
     {
         public double Length { get; set; }
         public double SIF { get; set; }
         public double DevelopmentRate { get; set; }
     }
-    class MackroCrack
-    {
-        public double length { get; set; }
-        public double SIF { get; set; }
-        public double DevelopmentRate { get; set; }
-    }
-
-    //class Stress
-    //{
-    //    public double RadialStress { get; set; }
-    //    public double FirstMainStress { get; set; }
-    //}
-
-    class Record
-    {
-        public Stress Stress { get; set; }
-    }
-
-
-
-
 }

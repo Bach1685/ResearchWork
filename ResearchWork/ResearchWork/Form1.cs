@@ -14,7 +14,7 @@ namespace ResearchWork
 {
     public partial class Form1 : Form
     {
-        public object[,] arrData;
+        public object[,] stressCash;
         public int iLastRow;
 
         public Form1()
@@ -29,15 +29,15 @@ namespace ResearchWork
         private void button1_Click(object sender, EventArgs e)
         {
             List<Area> areas = new List<Area>();
-            double InitialDestroyedStructuralElementsNumber = 0;
-            int stepsNumber = 0;
-            int cyclesPerStepNumber = 0;
+            double InitialDestroyedStructuralElementsCount = 0;
+            int stepsCount = 0;
+            int cyclesPerStepCount = 0;
 
             try
             {
-                InitialDestroyedStructuralElementsNumber = Convert.ToDouble(textBox1.Text);
-                cyclesPerStepNumber = Convert.ToInt32(textBox3.Text);
-                stepsNumber = Convert.ToInt32(textBox4.Text);
+                InitialDestroyedStructuralElementsCount = Convert.ToDouble(textBox1.Text);
+                cyclesPerStepCount = Convert.ToInt32(textBox3.Text);
+                stepsCount = Convert.ToInt32(textBox4.Text);
             }
             catch(Exception)
             {
@@ -45,28 +45,24 @@ namespace ResearchWork
                 return;
             }
 
-            
-
             // Task task = Task.Run(() => Methods.Systematizing(area, arrData, iLastRow));
 
-            Methods.Systematizing(areas, arrData, iLastRow);
-
+            Methods.Systematizing(areas, stressCash, iLastRow); // нужно попробовать работать не со списком, а с очередью какой-нибудь или стеком
+            // или просто удалять элемент из списка...
             foreach (Area area in areas)
             {
-                area.InitialDestroyedStructuralElementsNumber = Convert.ToDouble(InitialDestroyedStructuralElementsNumber);
-                area.StructuralElementsNumber = 4000; // перенести
+                area.InitialDestroyedStructuralElementsCount = Convert.ToDouble(InitialDestroyedStructuralElementsCount);
+               // area.StructuralElementsCount = 4000; // перенести
             }
             Models md = new Models();
 
-            Methods.TimeСycle(areas, stepsNumber, cyclesPerStepNumber); // надо проверить, как передается ShortCrackTotalProbability
-
+            Methods.TimeСycle(areas, stepsCount, cyclesPerStepCount); // надо проверить, как передается ShortCrackTotalProbability
 
             //Mdestructed0 = Math.Round((numberStructuralElements * damage0),0); //Зная поврежденность и общее количество СЭ, можно узнать количество разрушенных СЭ;
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
 
@@ -82,13 +78,18 @@ namespace ResearchWork
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку
 
             iLastRow = ObjWorkSheet.Cells[ObjWorkSheet.Rows.Count, "A"].End[Excel.XlDirection.xlUp].Row;  //последняя заполненная строка в столбце А
-            arrData = (object[,])ObjWorkSheet.Range["A1:O" + iLastRow].Value;
+            stressCash = (object[,])ObjWorkSheet.Range["A1:O" + iLastRow].Value;
 
             textBox2.Text = openFileDialog1.FileName;
 
             ObjWorkBook.Close(false, Type.Missing, Type.Missing); //закрыть не сохраняя
 
             ObjWorkExcel.Quit(); // выйти из экселя
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

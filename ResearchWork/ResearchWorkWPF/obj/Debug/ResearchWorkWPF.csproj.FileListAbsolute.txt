@@ -1,0 +1,15 @@
+D:\RW\ResearchWork\ResearchWorkWPF\bin\Debug\ResearchWorkWPF.exe.config
+D:\RW\ResearchWork\ResearchWorkWPF\bin\Debug\ResearchWorkWPF.exe
+D:\RW\ResearchWork\ResearchWorkWPF\bin\Debug\ResearchWorkWPF.pdb
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\ResearchWorkWPF.csprojAssemblyReference.cache
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\MainWindow.g.cs
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\App.g.cs
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\ResearchWorkWPF_MarkupCompile.cache
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\ResearchWorkWPF_MarkupCompile.lref
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\MainWindow.baml
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\ResearchWorkWPF.g.resources
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\ResearchWorkWPF.Properties.Resources.resources
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\ResearchWorkWPF.csproj.GenerateResource.cache
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\ResearchWorkWPF.csproj.CoreCompileInputs.cache
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\ResearchWorkWPF.exe
+D:\RW\ResearchWork\ResearchWorkWPF\obj\Debug\ResearchWorkWPF.pdb

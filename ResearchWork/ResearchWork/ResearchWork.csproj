@@ -59,11 +59,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Methods.cs" />
-    <Compile Include="Methods\AreaCycle.cs" />
-    <Compile Include="Methods\SendResultToForm.cs" />
-    <Compile Include="Methods\ShortCracksCycle.cs" />
-    <Compile Include="Methods\TimeСycle.cs" />
-    <Compile Include="Methods\Systematizing.cs" />
+    <Compile Include="Calculation\AreaCycle.cs" />
+    <Compile Include="Calculation\SendResultToForm.cs" />
+    <Compile Include="Calculation\ShortCracksCycle.cs" />
+    <Compile Include="Calculation\TimeСycle.cs" />
+    <Compile Include="Calculation\Systematizing.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

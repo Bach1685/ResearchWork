@@ -14,8 +14,11 @@ namespace ResearchWork
 {
     public partial class Form1 : Form
     {
-        public object[,] stressCash;
+        public object[,] stressesCash;
         public int iLastRow;
+        private Task FillStressesCashTask;
+        internal List<Area> areas;
+
 
         public Form1()
         {
@@ -28,14 +31,14 @@ namespace ResearchWork
 
         private void button1_Click(object sender, EventArgs e)
         {
-            List<Area> areas = new List<Area>();
-            double InitialDestroyedStructuralElementsCount = 0;
+            FillStressesCashTask.Wait();
+            double initialDamage = 0;
             int stepsCount = 0;
             int cyclesPerStepCount = 0;
 
             try
             {
-                InitialDestroyedStructuralElementsCount = Convert.ToDouble(textBox1.Text);
+                initialDamage = Convert.ToDouble(textBox1.Text);
                 cyclesPerStepCount = Convert.ToInt32(textBox3.Text);
                 stepsCount = Convert.ToInt32(textBox4.Text);
             }
@@ -45,20 +48,12 @@ namespace ResearchWork
                 return;
             }
 
-            // Task task = Task.Run(() => Methods.Systematizing(area, arrData, iLastRow));
+            areas.ForEach(x => x.Damage = initialDamage); 
 
-            Methods.Systematizing(areas, stressCash, iLastRow); // нужно попробовать работать не со списком, а с очередью какой-нибудь или стеком
-            // или просто удалять элемент из списка...
-            foreach (Area area in areas)
-            {
-                area.InitialDestroyedStructuralElementsCount = Convert.ToDouble(InitialDestroyedStructuralElementsCount);
-               // area.StructuralElementsCount = 4000; // перенести
-            }
-            Models md = new Models();
+            Calculation.TimeСycle(areas, stepsCount, cyclesPerStepCount); // надо проверить, как передается ShortCrackTotalProbability
 
-            Methods.TimeСycle(areas, stepsCount, cyclesPerStepCount); // надо проверить, как передается ShortCrackTotalProbability
-
-            //Mdestructed0 = Math.Round((numberStructuralElements * damage0),0); //Зная поврежденность и общее количество СЭ, можно узнать количество разрушенных СЭ;
+            //foreach (var area in areas)
+            //    richTextBox1.AppendText(area.Volume.ToString());
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -71,6 +66,20 @@ namespace ResearchWork
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
 
+            FillStressesCashTask = Task.Run(() => FillStressesCash(openFileDialog1));
+            //FillStressesCashTask.Wait();
+
+
+            textBox2.Text = openFileDialog1.FileName;
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void FillStressesCash(OpenFileDialog openFileDialog1)
+        {
             Excel.Application ObjWorkExcel = new Excel.Application(); //открыть эксель
             Excel.Workbook ObjWorkBook = ObjWorkExcel.Workbooks.Open(openFileDialog1.FileName); //открыть файл
             Excel.Worksheet ObjWorkSheet = (Excel.Worksheet)ObjWorkBook.Sheets[1]; //получить 1 лист
@@ -78,18 +87,50 @@ namespace ResearchWork
             var lastCell = ObjWorkSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell);//1 ячейку
 
             iLastRow = ObjWorkSheet.Cells[ObjWorkSheet.Rows.Count, "A"].End[Excel.XlDirection.xlUp].Row;  //последняя заполненная строка в столбце А
-            stressCash = (object[,])ObjWorkSheet.Range["A1:O" + iLastRow].Value;
-
-            textBox2.Text = openFileDialog1.FileName;
+            stressesCash = (object[,])ObjWorkSheet.Range["A1:O" + iLastRow].Value;
 
             ObjWorkBook.Close(false, Type.Missing, Type.Missing); //закрыть не сохраняя
 
             ObjWorkExcel.Quit(); // выйти из экселя
+
+            areas = new List<Area>();
+
+            Calculation.Systematizing(areas, stressesCash, iLastRow); // нужно попробовать работать не со списком, а с очередью какой-нибудь или стеком
+            // или просто удалять элемент из списка...
+            MakeButtonEnabled(button1);
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        private void MakeButtonEnabled(Button button)
         {
-            
+            if (button.InvokeRequired)
+            {
+                button.Invoke(new Action(() =>
+                {
+                    button.Enabled = true;
+                }));
+            }
+            else
+            {
+                button.Enabled = true;
+            }
+        }
+
+        private void ToRichTextBox(string text)
+        {
+            if (InvokeRequired)
+            {
+                
+                Invoke((Action<string>)ToRichTextBox, text);
+            }
+            else
+                richTextBox1.AppendText(text);
+        }
+
+        internal void ShowResult(List<Area> areas, int cycleCount)
+        {
+            richTextBox1.Text += "Text";
+
+            //richTextBox1.AppendText(cycleCount.ToString());
         }
     }
 }

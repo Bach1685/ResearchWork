@@ -8,7 +8,15 @@ namespace ResearchWork
 {
     class Models
     {
+        /// <summary>
+        /// Список участков
+        /// </summary>
         public List<Area> Areas = new List<Area>();
+
+        ///// <summary>
+        ///// Начальная поврежденность участка
+        ///// </summary>
+        //public double InitialDamage { get; set; }
 
         /// <summary>
         /// Вероятность возникновения КТ во всем объеме
@@ -21,7 +29,7 @@ namespace ResearchWork
         /// <summary>
         /// Объем участка
         /// </summary>
-        public double Value { get; set; }
+        public double Volume { get; set; }
         
         /// <summary>
         /// Поврежденность участка
@@ -43,15 +51,15 @@ namespace ResearchWork
         /// </summary>
         public double DestroyedStructuralElementsCount  { get; set; }
 
-        /// <summary>
-        /// Начальная поврежденность участка
-        /// </summary>
-        public double InitialDamage { get; set; }
+        ///// <summary>
+        ///// Начальная поврежденность участка
+        ///// </summary>
+        //public double InitialDamage { get; set; }
 
-        /// <summary>
-        /// Начальное количество разрушенных СЭ
-        /// </summary>
-        public double InitialDestroyedStructuralElementsCount { get; set; }
+        ///// <summary>
+        ///// Начальное количество разрушенных СЭ
+        ///// </summary>
+        //public double InitialDestroyedStructuralElementsCount { get; set; }
 
         /// <summary>
         /// Напряжения

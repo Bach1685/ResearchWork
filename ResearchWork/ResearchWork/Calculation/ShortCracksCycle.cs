@@ -9,8 +9,10 @@ namespace ResearchWork
 {
     partial class Calculation
     {
-        public static void ShortCracksCycle(Area area, int areasCount, int cyclesPerStepCount, ref double V_sum)
+        public static void ShortCracksCycle(Area area, int areasCount, int cyclesPerStepCount, out double ExcludedVolume)
         {
+            ExcludedVolume = 0;
+
             foreach (var shortCrack in area.ShortCracks)
             {
                 shortCrack.DevelopmentRate = Math.Pow(10, -6) * Math.Pow(shortCrack.SIF, 5);
@@ -29,10 +31,7 @@ namespace ResearchWork
                     shortCrack.SIF = GetRecalculatedSIF(area, shortCrack);
                 }
 
-                V_sum += GetExcludedVolume(shortCrack, area);
-
-                if (V_sum > area.Volume * areasCount)
-                { }
+                ExcludedVolume += GetExcludedVolume(shortCrack, area);
             }
         }
 

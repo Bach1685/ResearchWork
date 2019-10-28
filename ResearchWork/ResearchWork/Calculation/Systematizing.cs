@@ -39,8 +39,8 @@ namespace ResearchWork
                         ar.Stress.MaxPrincipal = Math.Abs(recordMaxPrincipal.Sum() / recordMaxPrincipal.Length);
                         area.Add(ar);
 
-                        //if (area.Count == 900)
-                        //{ break; } // удалить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        if (area.Count == 900)
+                        { break; } // удалить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                         a = 0;
                         r -= 2;

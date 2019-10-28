@@ -11,8 +11,11 @@ namespace ResearchWork
     {
         public static bool ExistsMackroCrack { get; set; }
 
+        public static string Result { get; set; }
+
         public static void TimeСycle(List<Area> areas, int stepsCount, int cyclesPerStepCount)
         {
+            Result = "Не возникла ни одна короткая трещина";
             int cycleCounter = 0;
             ExistsMackroCrack = false;
             areas.FindAll(x => x.ShortCracks != null).ForEach(y => y.ShortCracks.Clear());
@@ -29,15 +32,14 @@ namespace ResearchWork
                 AreaCycle(areas, cyclesPerStepCount, ref shortCrackTotalProbability);
 
                 if (shortCrackTotalProbability >= 0.5)
+                {
+                    Form1 form1 = new Form1();
+                    Result = $"Появилась короткая трещина. Прошло циклов: {cycleCounter}";
                     CreateShortCrack(areas);
-                else
-                { }
+                }
 
                 if (ExistsMackroCrack)
                     return;
-
-
-                //var count = areas.Sum(x => x.ShortCracks.Count());
 
                 cycleCounter += cyclesPerStepCount;
             }

@@ -19,7 +19,6 @@ namespace ResearchWork
         private Task FillStressesCashTask;
         internal List<Area> areas;
 
-
         public Form1()
         {
             InitializeComponent();
@@ -50,10 +49,9 @@ namespace ResearchWork
 
             areas.ForEach(x => x.Damage = initialDamage); 
 
-            Calculation.TimeСycle(areas, stepsCount, cyclesPerStepCount); // надо проверить, как передается ShortCrackTotalProbability
-
-            //foreach (var area in areas)
-            //    richTextBox1.AppendText(area.Volume.ToString());
+            Calculation.TimeСycle(areas, stepsCount, cyclesPerStepCount, out string Result); // надо проверить, как передается ShortCrackTotalProbability
+  
+            richTextBox1.AppendText(Result);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -61,14 +59,13 @@ namespace ResearchWork
         }
 
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ReviewButton_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
 
             FillStressesCashTask = Task.Run(() => FillStressesCash(openFileDialog1));
             //FillStressesCashTask.Wait();
-
 
             textBox2.Text = openFileDialog1.FileName;
         }
@@ -97,6 +94,9 @@ namespace ResearchWork
 
             Calculation.Systematizing(areas, stressesCash, iLastRow); // нужно попробовать работать не со списком, а с очередью какой-нибудь или стеком
             // или просто удалять элемент из списка...
+            areas.ForEach(area => area.Volume = ((1.021 * Math.Pow(10, -6)) / areas.Count));
+            areas.ForEach(area => area.StructuralElementsCount = Math.Round(area.Volume * 4000 * Math.Pow(10, 9), 0)); // 4000 * 1000 - структурных элементов  в 1 м^3
+
             MakeButtonEnabled(button1);
         }
 

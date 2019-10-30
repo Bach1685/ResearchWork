@@ -28,6 +28,11 @@ namespace ResearchWork
             //label1.Text = "Начальная поврежденность";
         }
 
+        private void ReviewButton_MouseEnter(object sender, EventArgs e)
+        {
+            ReviewButton.BackColor = Color.Red;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             FillStressesCashTask.Wait();
@@ -44,20 +49,25 @@ namespace ResearchWork
             catch(Exception)
             {
                 MessageBox.Show("Некорректный ввод!");
+
+                Button button = new Button();
+                button.Left = 50;
+                button.Top = 50;
+                this.Controls.Add(button);
+
                 return;
             }
 
             areas.ForEach(x => x.Damage = initialDamage); 
 
-            Calculation.TimeСycle(areas, stepsCount, cyclesPerStepCount, out string Result); // надо проверить, как передается ShortCrackTotalProbability
+            Calculation.TimeСycle(areas, stepsCount, cyclesPerStepCount); // надо проверить, как передается ShortCrackTotalProbability
   
-            richTextBox1.AppendText(Result);
+            richTextBox1.AppendText(Calculation.Result);
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
         }
-
 
         private void ReviewButton_Click(object sender, EventArgs e)
         {

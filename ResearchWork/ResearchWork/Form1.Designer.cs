@@ -34,7 +34,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.Review = new System.Windows.Forms.Button();
+            this.ReviewButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -92,13 +92,14 @@
             // 
             // Review
             // 
-            this.Review.Location = new System.Drawing.Point(208, 236);
-            this.Review.Name = "Review";
-            this.Review.Size = new System.Drawing.Size(75, 23);
-            this.Review.TabIndex = 5;
-            this.Review.Text = "Обзор...";
-            this.Review.UseVisualStyleBackColor = true;
-            this.Review.Click += new System.EventHandler(this.ReviewButton_Click);
+            this.ReviewButton.Location = new System.Drawing.Point(208, 236);
+            this.ReviewButton.Name = "Review";
+            this.ReviewButton.Size = new System.Drawing.Size(75, 23);
+            this.ReviewButton.TabIndex = 5;
+            this.ReviewButton.Text = "Обзор...";
+            this.ReviewButton.UseVisualStyleBackColor = true;
+            this.ReviewButton.Click += new System.EventHandler(this.ReviewButton_Click);
+            this.ReviewButton.MouseEnter += new System.EventHandler(this.ReviewButton_MouseEnter);
             // 
             // label2
             // 
@@ -151,7 +152,7 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.Review);
+            this.Controls.Add(this.ReviewButton);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox1);
@@ -172,7 +173,7 @@
         public System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button Review;
+        private System.Windows.Forms.Button ReviewButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox3;
